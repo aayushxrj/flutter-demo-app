@@ -90,15 +90,51 @@ class _CounterPageState extends State<CounterPage> {
       ),
 
       body: Center(
-        child: Text(
-          'Count: $count',
-          style: const TextStyle(fontSize: 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Count: $count',
+              style: const TextStyle(fontSize: 28),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SecondPage(),
+                  ),
+                );
+              },
+              child: const Text('Go to Second Page'),
+            ),
+          ],
         ),
       ),
-      
+
       floatingActionButton: FloatingActionButton(
         onPressed: _increaseCount,
         child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text('Second Page'),
+      ),
+      body: const Center(
+        child: Text(
+          'Welcome to page 2',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }
