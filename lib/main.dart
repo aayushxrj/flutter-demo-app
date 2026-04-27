@@ -9,18 +9,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Old UI kept for reference.
+    /*
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
           title: Text('Flutter Demo Home Page'),
         ),
-
-        body :
-        Center(
+        body: Center(
           child: Text('Hello World'),
         ),
-
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
@@ -36,27 +35,70 @@ class MyApp extends StatelessWidget {
               label: 'Profile',
             ),
           ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: const [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Drawer Header'),
+              ),
+              ListTile(
+                title: Text('Item 1'),
+              ),
+              ListTile(
+                title: Text('Item 2'),
+              ),
+            ],
           ),
+        ),
+      ),
+    );
+    */
 
-          drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: const [
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                  ),
-                  child: Text('Drawer Header'),
-                ),
-                ListTile(
-                  title: Text('Item 1'),
-                ),
-                ListTile(
-                  title: Text('Item 2'),
-                ),
-              ],
-            ),
-          ),
+    return const MaterialApp(
+      home: CounterPage(),
+    );
+  }
+}
+
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key});
+
+  @override
+  State<CounterPage> createState() => _CounterPageState();
+}
+
+class _CounterPageState extends State<CounterPage> {
+  int count = 0;
+
+  void _increaseCount() {
+    setState(() {
+      count++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: const Text('Counter App'),
+      ),
+
+      body: Center(
+        child: Text(
+          'Count: $count',
+          style: const TextStyle(fontSize: 28),
+        ),
+      ),
+      
+      floatingActionButton: FloatingActionButton(
+        onPressed: _increaseCount,
+        child: const Icon(Icons.add),
       ),
     );
   }
